@@ -1,0 +1,170 @@
+<html><head>
+<title>GSM Cloning</title></head><body>
+
+
+<h1>GSM Cloning</h1>
+
+<p><b>History:</b>
+On April 13, 1998, the <a href="http://www.scard.org">Smartcard
+Developer Association</a> and the
+<a href="http://www.isaac.cs.berkeley.edu">ISAAC security research group</a>
+announced a flaw in the authentication
+codes found in digital GSM cellphones.  This allows an attacker with
+physical access to a target phone to make an exact duplicate (a ``clone'')
+and to make fraudulent calls billed to the target user's account.</p>
+
+<p>At the time of the announcement, we published an
+<a href="gsm-faq.html">overview of our results</a>,
+including some detailed technical information.
+(Note that some of this information, specifically regarding the
+possibility of over-the-air cloning, is now outdated.
+See below for more discussion.)</p>
+
+<p>Press coverage: 
+<a href="http://www.latimes.com/HOME/NEWS/BUSINESS/t000035457.1.html">The Los Angeles Times</a> [<a href="local-copies/latimes.html">local copy</a>];
+<a href="http://www.nytimes.com/library/tech/yr/mo/biztech/articles/14phone.html">The New York Times</a>;
+<a href="http://www.nytimes.com/aponline/a/AP-Phone-Code-Cracked.html">The Associated Press</a>;
+<a href="http://www.jya.com/gsm-cloned.htm">The Wall Street Journal</a>;
+<a href="http://www.sjmercury.com/breaking/docs/080144.htm">USA Today</a>;
+<a href="http://www.wired.com/news/news/technology/story/11630.html">Wired News</a>;
+<a href="http://cgi.pathfinder.com/time/daily/0,1237,101980413-netly,00.html">Time daily</a>;
+<a href="http://www.pathfinder.com/time/magazine/1998/dom/980420/notebook.techwatch.levit24.html">Time magazine</a>;
+<a href="http://cgi.pathfinder.com/netly/textonly/1,1035,1898,00.html">The Netly News</a>;
+<a href="http://www.cnn.com/TECH/science/9804/14/phone.code.ap/">CNN</a>;
+<a href="http://www.abcnews.com/sections/tech/DailyNews/cellphones980414.html">ABC News</a>;
+<a href="http://www.wow-com.com/results/professional/news/newsindex.cfm#1357">Wireless Daily News</a> [<a href="wow.html#1357">local copy</a>];
+<a href="http://www.dailycal.org/archive/04.14.98/news/news_briefs.html">The Daily Californian</a>.
+</p>
+
+<p>Readers of the <tt>scard</tt> mailing list have pointed out that,
+in Europe, one can anonymously rent GSM cellphones quite cheaply.
+The prospect of those phones getting cloned is a bit worrisome.</p>
+
+<p><b>Three years later:</b>
+Indications are that the GSM industry is taking steps to
+repair the security weaknesses in the GSM cryptographic algorithms.
+A patched version of COMP128 is now available (called COMP128-2),
+although it remains unpublished.
+
+<p>Most importantly, the GSM industry appears to have
+at least partially learned the important lesson here:
+`security through obscurity doesn't work'.
+The next-generation replacement for GSM, called 3GPP,
+will use algorithms developed based on principles from the
+research literature.
+The 3GPP cryptographic algorithms have been published for
+scientists to study, which gives the research community a chance
+to give early warning of any potential weaknesses and also to gain
+confidence in the 3GPP ciphers.
+I am strongly supportive of this effort.
+
+<p>Note that the other major players in this arena moved some time ago
+to open design processes.  This includes the next-generation AES
+standard process being shepherded by the US government, as well as
+the US cellular industry.  The US cellular industry is an interesting
+case study: initially they used closed design, but after several of
+their cryptographic algorithms were rapidly broken by cryptographers
+in the open research community, to their credit
+they quickly moved to an open design process.  I am glad that the
+GSM/3GPP industry has recognized the benefits of this approach.</p>
+
+<p>I also understand that the GSM Association has agreed to develop a new,
+stronger voice encryption cipher called A5/3, apparently based on Kasumi
+(a block cipher which was developed based on principles from the
+research literature).  It will apparently become mandatory to support
+A5/3 at some point in the future.
+I strongly support the GSM Association's efforts to repair the
+ailing series of voice privacy algorithms and provide robust voice privacy
+protection for the future.
+
+<p>Further information on cryptographic algorithms in GSM and 3GPP
+may be found at several web pages:
+<ul>
+<li> <a href="http://www.research.att.com/~janos/3gpp.html">A
+very nice guide to 3GPP cryptographic algorithms</a>, from Janos A.
+Csirik.
+<li> <a href="http://www.brookson.com/gsm/contents.htm">A very nice
+set of links to information on GSM security</a>, from Charles Brookson.
+<li> <a href="http://www.dia.unisa.it/ads.dir/corso-security/www/CORSO-9900/a5/Netsec/netsec.html">A survey on GSM security</a>, from Lauri Pesonen.
+</ul>
+
+
+<p><b>Over-the-air cloning:</b>
+In our original announcement, we noted that we could not rule out
+the possibility of over-the-air attacks, but we emphasized that we had not
+demonstrated such an attack.
+At that time, we did not provide any further analysis on the
+resources required to mount an over-the-air attack.
+There was, for obvious reasons, considerable interest in the possibility
+of over-the-air attacks, and we had reason to suspect they might be
+possible, but we wanted to be extremely conservative in reporting only
+what we knew for certain was exploitable.
+That viewpoint is probably now best regarded as outdated.</p>
+
+<p> Since then,
+extensive conversations with many knowledgeable GSM engineers
+has caused us to conclude that over-the-air attacks must be considered
+available to the sophisticated attacker in practice.
+We still have not attempted to build a laboratory demonstration
+(it would apparently be illegal to do this type of research under US law),
+but the GSM experts we've spoken with have confirmed that it should
+be possible and practical to do so.
+They have reported that
+a number of aspects of the GSM protocols combine to make it possible to
+mount the mathematical chosen-input attack on COMP128, if one can build
+a fake base station.
+Such a fake base station does not need to support the full GSM protocol,
+and it may be possible to build one with an investment
+of approximately $10k.</p>
+
+<p>Some technical expertise is probably required to pull off the
+over-the-air cloning attack, and the attack requires over-the-air
+access to the target handset for a relatively long period of time.
+Therefore, this may be considered a lower level of risk than
+that found in old US analog systems with no authentication at all.
+Nonetheless, please note that it would be a mistake to underestimate
+the technical sophistication or the financial resources of some of
+today's attackers: some of them are surprisingly well-positioned
+to mount even relatively sophisticated and costly attacks.
+Therefore, we feel that the new information
+provides evidence that <em>over-the-air cloning must be considered a very
+real threat</em> which should not be ignored.</p>
+
+<p><b>Primary sources</b>:
+For the mathematicians and cryptographers: It seems that the COMP128
+algorithm has leaked abroad to
+<a href="http://www.scard.org/gsm/a3a8.txt">this web site</a>
+(see also, e.g., <a href="http://www.iol.ie/~kooltek/a3a8.txt">here</a>).
+(I was emailed this information just a day after the announcement of
+our results.  It wasn't me; I didn't leak or export
+the information.)
+And the <a href="http://jya.com/gsm061088.htm">leaked GSM document specifying
+COMP128</a> is also available on the net, thanks to
+<a href="http://www.jya.com/">John Young</a>.</p>
+
+<p>For reference, the <a href="gsm-press.html">press release</a> we sent
+out is available here.
+To contact the SDA, call 925-798-4042, or email
+<a href="mailto:marc@scard.org">Marc Briceno</a>;
+to contact the ISAAC group, email
+<a href="mailto:daw@cs.berkeley.edu">David Wagner</a> or
+<a href="mailto:ian@cypherpunks.ca">Ian Goldberg</a>.</p>
+
+<p>The Cellular Telecommunications Industry Association (a US cellphone
+industry consortium) has issued
+<a href="http://www.wow-com.com/results/professional/news/newsindex.cfm#1358">a press release</a> [<a href="wow.html#1358">local copy</a>] on the subject.
+And the GSM industry released
+<a href="http://www.wow-com.com/results/professional/news/newsindex.cfm#1423">a press release</a> [<a href="wow.html#1423">local copy</a>]
+of their own which is also worth reading.</p>
+
+<p>Also, <a href="http://www.crossbar.com/">Crossbar Security, Inc.</a>
+has issued a <a href="crossbar.txt">press release</a> where
+they report independent verification of our technical results.  (We are
+not affiliated with Crossbar Security.)</a>
+
+<hr>
+<p>Web page maintained by
+<a href="mailto:daw@cs.berkeley.edu">David Wagner</a>
+on behalf of the SDA and ISAAC.</p>
+
+</body></html>
